@@ -20,13 +20,11 @@ output: html_document
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 
-library(devtools)
-#devtools::install_github("kjhealy/socviz")
 
 x <- read_csv("https://pollofpolls.eu/get/polls/ES-parliament/format/csv")
 ```
 
-```{r polling}
+```{r polling, warning = FALSE, echo=FALSE, message=FALSE}
 # Make a list of firms with at least 40 polls
 
 good_firms <- x %>% 
@@ -54,7 +52,7 @@ y <- x %>%
 y %>% filter(party %in% c("PSOE", "Cs", "PP", "Podemos", "VOX")) %>% 
   ggplot(aes(x = date, y = poll, color = party)) +
   geom_point() +
-  geom_smooth(se = FALSE)
+  geom_smooth(se = FALSE) + labs(title = "Polling in Advance of Spanish Election on April 28", x = "Date", y = "Percentage Support")
 
 
 ```
